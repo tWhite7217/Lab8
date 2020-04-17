@@ -6,8 +6,6 @@ public class MyMovingImageModel2 {
 
 	private ArrayList<Double> xs = new ArrayList<Double>();
 	private ArrayList<Double> ys = new ArrayList<Double>();
-	private final double SIDE = 800;
-	private final double BOTTOM = 600;
 	private final double FLOW_SIDE = 700;
 	private final double FLOW_BOTTOM = 600;
 	private final double PIC_SIZE = 100;
