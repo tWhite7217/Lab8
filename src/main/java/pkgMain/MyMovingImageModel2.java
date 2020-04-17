@@ -6,6 +6,8 @@ public class MyMovingImageModel2 {
 
 	private double x1 = 0;
 	private double y1 = 0;
+	private double mouseXSinceDrag = 0;
+	private double mouseYSinceDrag = 0;
 	private ArrayList<Double> xs = new ArrayList<Double>();
 	private ArrayList<Double> ys = new ArrayList<Double>();
 	private final double SIDE = 800;
@@ -27,7 +29,7 @@ public class MyMovingImageModel2 {
 		return xs.get(index);
 	}
 	public void setXs(int index, double x) {
-		xs.set(index, Math.min(x, BOTTOM));
+		xs.set(index, Math.min(x, SIDE));
 	}
 	public double getYs(int index) {
 		return ys.get(index);
@@ -35,10 +37,22 @@ public class MyMovingImageModel2 {
 	public void setYs(int index, double y) {
 		ys.set(index, Math.min(y, BOTTOM));
 	}
-	public void addX() {
-		xs.add(0.0);
+	public double getMouseXSinceDrag() {
+		return mouseXSinceDrag;
 	}
-	public void addY() {
-		ys.add(0.0);
+	public double getMouseYSinceDrag() {
+		return mouseYSinceDrag;
+	}
+	public void setMouseXSinceDrag(double x) {
+		mouseXSinceDrag = x;
+	}
+	public void setMouseYSinceDrag(double y) {
+		mouseXSinceDrag = y;
+	}
+	public void addX(double x) {
+		xs.add(x);
+	}
+	public void addY(double y) {
+		ys.add(y);
 	}
 }

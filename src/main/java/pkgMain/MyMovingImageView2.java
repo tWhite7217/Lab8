@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -28,6 +29,7 @@ public class MyMovingImageView2 extends Application {
 	Image im1;
 	private final double WIDTH = 800;
 	private final double HEIGHT = 600;
+	private final double LEFT_PANE_WIDTH = 100;
 	
 	public MyMovingImageView2(){
     	iv1 = new ImageView();
@@ -46,6 +48,7 @@ public class MyMovingImageView2 extends Application {
     	iv1.setFitHeight(100);
     	iv1.setOnMouseDragged(imc.getHandlerForDrag());
     	iv1.setOnMousePressed(imc.getHandlerForPress());
+    	iv1.setOnMouseReleased(imc.getHandlerForDragReleased());
     	
     	BorderPane rootPane = new BorderPane();
     	
@@ -58,6 +61,8 @@ public class MyMovingImageView2 extends Application {
     	
     	flow = new FlowPane();
     	flow.setStyle("-fx-background-color: DAE6F3;");
+//    	flow.setOnMouseDragOver(imc.getHandlerForDragOver());
+//    	flow.setAlignment(Pos.BASELINE_LEFT);
     	
     	rootPane.setCenter(flow);
     	rootPane.setLeft(tile);
@@ -86,14 +91,17 @@ public class MyMovingImageView2 extends Application {
         launch();
     }
     
-    public void addIVToFlow() {
+    public int addIVToFlow() {
     	ivs.add(new ImageView());
     	int i = ivs.size()-1;
     	ivs.get(i).setImage(im1);
     	ivs.get(i).setPreserveRatio(true);
     	ivs.get(i).setFitHeight(100);
     	ivs.get(i).setOnMouseDragged(imc.getHandlerForDrag(i));
+    	ivs.get(i).setLayoutX(0);
+    	ivs.get(i).setLayoutY(0);
     	flow.getChildren().add(ivs.get(i));
+    	return i;
     }
 
 }

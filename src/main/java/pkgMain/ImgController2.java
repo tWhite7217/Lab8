@@ -10,7 +10,7 @@ public class ImgController2 {
 	private final boolean DEBUG = true;
 	MyMovingImageView2 view;
 	MyMovingImageModel2 model;
-	boolean copied = false;
+	boolean copied = true;
 	
 	ImgController2(MyMovingImageView2 view){
 		this.view = view;
@@ -20,16 +20,16 @@ public class ImgController2 {
 	
 	public void drag(MouseEvent event) {
 		System.out.println("here2");
-		Node n = (Node)event.getSource();
+//		Node n = (Node)event.getSource();
 //		if (DEBUG) System.out.println("ic mouse drag tx: " + n.getTranslateX() + ", ex: " + event.getX() );
-		model.setX(model.getX() + event.getX()); //event.getX() is the amount of horiz drag
-		model.setY(model.getY() + event.getY());
-		view.setX( model.getX() );
-		view.setY( model.getY() );
-		if (n.getTranslateX() > 100 && !copied) {
-			view.addIVToFlow();
-			model.addX();
-			model.addY();
+		if (DEBUG) System.out.println("ic mouse drag tx: " + model.getMouseXSinceDrag() + ", ex: " + event.getX() );
+//		model.setMouseYSinceDrag(model.getMouseYSinceDrag() + event.getY());
+		if (event.getX() > 100 && !copied) {
+			int index = view.addIVToFlow();
+			model.addX(0);
+			model.addY(event.getY());
+			view.setXs(index, 0-(index*100));
+			view.setYs(index, event.getY());
 			copied = true;
 		}
 		//n.setTranslateX(n.getTranslateX() + event.getX()); //not MVC! what problem does this create?
@@ -38,8 +38,8 @@ public class ImgController2 {
 	
 	public void dragFlow(int i, MouseEvent event) {
 		System.out.println("here3");
-		Node n = (Node)event.getSource();
-//		if (DEBUG) System.out.println("ic mouse drag tx: " + n.getTranslateX() + ", ex: " + event.getX() );
+//		Node n = (Node)event.getSource();
+		if (DEBUG) System.out.println("ic mouse drag tx: " + model.getXs(i) + ", ex: " + event.getX() );
 		model.setXs(i, model.getXs(i) + event.getX()); //event.getX() is the amount of horiz drag
 		model.setYs(i, model.getYs(i) + event.getY());
 		view.setXs(i, model.getXs(i) );
@@ -52,9 +52,19 @@ public class ImgController2 {
 		System.out.println("here");
 		copied = false;
 	}
+	
+	public void dragReleased(MouseEvent event) {
+		System.out.println("released");
+		copied = true;
+		model.setMouseXSinceDrag(0);
+	}
 
 	public EventHandler getHandlerForDrag() {
 		return event -> drag((MouseEvent) event);
+	}
+	
+	public EventHandler getHandlerForDragReleased() {
+		return event -> dragReleased((MouseEvent) event);
 	}
 	
 	public EventHandler getHandlerForDrag(int i) {
@@ -64,6 +74,10 @@ public class ImgController2 {
 	public EventHandler getHandlerForPress() {
 		return event -> press((MouseEvent) event);
 	}
+	
+//	public EventHandler getHandlerForDragOver() {
+//		return event -> dragOver((MouseEvent) event);
+//	}
 	
 //	public EventHandler getHandlerForTileDrag() {
 //		return event -> copy((MouseEvent) event);
