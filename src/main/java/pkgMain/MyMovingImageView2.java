@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,7 +46,7 @@ public class MyMovingImageView2 extends Application {
     	iv1.setOnMousePressed(imc.getHandlerForPress());
     	iv1.setOnMouseReleased(imc.getHandlerForDragReleased());
     	
-    	BorderPane rootPane = new BorderPane();
+    	
     	
     	TilePane tile = new TilePane();
     	tile.setHgap(0);
@@ -53,12 +54,16 @@ public class MyMovingImageView2 extends Application {
     	tile.setPrefColumns(0);
     	tile.setPadding(new Insets(5, 0, 5, 0));
     	tile.getChildren().add(iv1);
+    	tile.setMaxWidth(100);
     	
     	flow = new Pane();
+    	flow.setTranslateX(100);
     	flow.setStyle("-fx-background-color: DAE6F3;");
     	
-    	rootPane.setCenter(flow);
-    	rootPane.setLeft(tile);
+    	StackPane rootPane = new StackPane(tile, flow);
+    	
+    	StackPane.setAlignment(tile, Pos.CENTER_LEFT);
+    	StackPane.setAlignment(flow, Pos.CENTER);
 
     	Scene scene = new Scene(rootPane, WIDTH, HEIGHT);
         stage.setScene(scene);
