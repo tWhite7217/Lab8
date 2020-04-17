@@ -28,7 +28,7 @@ public class ImgController2 {
 			int index = view.addIVToFlow();
 			model.addX(0);
 			model.addY(event.getY());
-			view.setXs(index, 0-(index*100));
+			view.setXs(index, 0);
 			view.setYs(index, event.getY());
 			copied = true;
 		}

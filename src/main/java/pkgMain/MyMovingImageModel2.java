@@ -12,6 +12,9 @@ public class MyMovingImageModel2 {
 	private ArrayList<Double> ys = new ArrayList<Double>();
 	private final double SIDE = 800;
 	private final double BOTTOM = 600;
+	private final double FLOW_SIDE = 700;
+	private final double FLOW_BOTTOM = 600;
+	private final double PIC_SIZE = 100;
 	
 	public double getX() {
 		return x1;
@@ -29,13 +32,13 @@ public class MyMovingImageModel2 {
 		return xs.get(index);
 	}
 	public void setXs(int index, double x) {
-		xs.set(index, Math.min(x, SIDE));
+		xs.set(index, Math.max(0, Math.min(x, FLOW_SIDE - PIC_SIZE)));
 	}
 	public double getYs(int index) {
 		return ys.get(index);
 	}
 	public void setYs(int index, double y) {
-		ys.set(index, Math.min(y, BOTTOM));
+		ys.set(index, Math.max(0, Math.min(y, FLOW_BOTTOM - PIC_SIZE)));
 	}
 	public double getMouseXSinceDrag() {
 		return mouseXSinceDrag;

@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -25,7 +26,7 @@ public class MyMovingImageView2 extends Application {
 	private ImgController2 imc;
 	private ImageView iv1;
 	private ArrayList<ImageView> ivs;
-	FlowPane flow;
+	Pane flow;
 	Image im1;
 	private final double WIDTH = 800;
 	private final double HEIGHT = 600;
@@ -59,7 +60,7 @@ public class MyMovingImageView2 extends Application {
     	tile.setPadding(new Insets(5, 0, 5, 0));
     	tile.getChildren().add(iv1);
     	
-    	flow = new FlowPane();
+    	flow = new Pane();
     	flow.setStyle("-fx-background-color: DAE6F3;");
 //    	flow.setOnMouseDragOver(imc.getHandlerForDragOver());
 //    	flow.setAlignment(Pos.BASELINE_LEFT);
