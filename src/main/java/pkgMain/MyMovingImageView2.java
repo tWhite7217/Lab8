@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+<<<<<<< HEAD
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+=======
+>>>>>>> master
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
@@ -30,7 +30,6 @@ public class MyMovingImageView2 extends Application {
 	Image im1;
 	private final double WIDTH = 800;
 	private final double HEIGHT = 600;
-	private final double LEFT_PANE_WIDTH = 100;
 	
 	public MyMovingImageView2(){
     	iv1 = new ImageView();
@@ -44,8 +43,6 @@ public class MyMovingImageView2 extends Application {
     	im1 = new Image(getClass().getResourceAsStream("/img/commonMilkweed.png"));
     	iv1.setImage(im1);
     	iv1.setPreserveRatio(true);
-//    	iv1.setLayoutX(imc.getStartingX());
-//    	iv1.setLayoutY(imc.getStartingY());
     	iv1.setFitHeight(100);
     	iv1.setOnMouseDragged(imc.getHandlerForDrag());
     	iv1.setOnMousePressed(imc.getHandlerForPress());
@@ -62,17 +59,12 @@ public class MyMovingImageView2 extends Application {
     	
     	flow = new Pane();
     	flow.setStyle("-fx-background-color: DAE6F3;");
-//    	flow.setOnMouseDragOver(imc.getHandlerForDragOver());
-//    	flow.setAlignment(Pos.BASELINE_LEFT);
     	
     	rootPane.setCenter(flow);
     	rootPane.setLeft(tile);
 
     	Scene scene = new Scene(rootPane, WIDTH, HEIGHT);
         stage.setScene(scene);
-        
-		iv1.setTranslateX(imc.getStartingX());
-		iv1.setTranslateY(imc.getStartingY());
 
         stage.show();
     }
