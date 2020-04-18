@@ -3,12 +3,10 @@ package pkgMain;
 import java.util.ArrayList;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -28,6 +26,8 @@ public class MyMovingImageView2 extends Application {
 	Image im1;
 	private final double WIDTH = 800;
 	private final double HEIGHT = 600;
+	private final double TILE_PANE_WIDTH = 100;
+	private final double PIC_SIZE = 100;
 	
 	public MyMovingImageView2(){
     	iv1 = new ImageView();
@@ -41,7 +41,7 @@ public class MyMovingImageView2 extends Application {
     	im1 = new Image(getClass().getResourceAsStream("/img/commonMilkweed.png"));
     	iv1.setImage(im1);
     	iv1.setPreserveRatio(true);
-    	iv1.setFitHeight(100);
+    	iv1.setFitHeight(PIC_SIZE);
     	iv1.setOnMouseDragged(imc.getHandlerForDrag());
     	iv1.setOnMousePressed(imc.getHandlerForPress());
     	iv1.setOnMouseReleased(imc.getHandlerForDragReleased());
@@ -49,15 +49,11 @@ public class MyMovingImageView2 extends Application {
     	
     	
     	TilePane tile = new TilePane();
-    	tile.setHgap(0);
-    	tile.setVgap(0);
-    	tile.setPrefColumns(0);
-    	tile.setPadding(new Insets(5, 0, 5, 0));
     	tile.getChildren().add(iv1);
-    	tile.setMaxWidth(100);
+    	tile.setMaxWidth(TILE_PANE_WIDTH);
     	
-    	flow = new Pane();
-    	flow.setTranslateX(100);
+    	flow = new FlowPane();
+    	flow.setTranslateX(TILE_PANE_WIDTH);
     	flow.setStyle("-fx-background-color: DAE6F3;");
     	
     	StackPane rootPane = new StackPane(tile, flow);
@@ -69,6 +65,18 @@ public class MyMovingImageView2 extends Application {
         stage.setScene(scene);
 
         stage.show();
+    }
+    public double getWidth() {
+    	return WIDTH;
+    }
+    public double getHeight() {
+    	return HEIGHT;
+    }
+    public double getTPWidth() {
+    	return TILE_PANE_WIDTH;
+    }
+    public double getPicSize() {
+    	return PIC_SIZE;
     }
     public void setX(double x) {
     	iv1.setTranslateX(iv1.getLayoutX() + x);
@@ -91,10 +99,8 @@ public class MyMovingImageView2 extends Application {
     	int i = ivs.size()-1;
     	ivs.get(i).setImage(im1);
     	ivs.get(i).setPreserveRatio(true);
-    	ivs.get(i).setFitHeight(100);
+    	ivs.get(i).setFitHeight(PIC_SIZE);
     	ivs.get(i).setOnMouseDragged(imc.getHandlerForDrag(i));
-    	ivs.get(i).setLayoutX(0);
-    	ivs.get(i).setLayoutY(0);
     	flow.getChildren().add(ivs.get(i));
     	return i;
     }
